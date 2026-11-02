@@ -35,6 +35,7 @@ android {
 dependencies {
     implementation(libs.activity.ktx)
     implementation(libs.appcompat)
+    implementation(libs.cardview)
     implementation(libs.constraintlayout)
     implementation(libs.material)
     implementation("com.squareup.retrofit2:retrofit:2.9.0")

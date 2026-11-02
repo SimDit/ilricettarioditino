@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name" translatable="false">IlRicettarioDiTino</string>
+    <string name="welcome_description">Esplora nuove ricette, lasciati ispirare da nuovi piatti e raccogli tutti i tuoi preferiti in un unico posto. Crea il tuo ricettario personale e porta sempre con te le tue idee in cucina.</string>
+    <string name="welcome_button" translatable="false">Login</string>
 </resources>
