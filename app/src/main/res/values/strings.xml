@@ -2,4 +2,13 @@
     <string name="app_name" translatable="false">IlRicettarioDiTino</string>
     <string name="welcome_description">Esplora nuove ricette, lasciati ispirare da nuovi piatti e raccogli tutti i tuoi preferiti in un unico posto. Crea il tuo ricettario personale e porta sempre con te le tue idee in cucina.</string>
     <string name="welcome_button" translatable="false">Login</string>
+    <string name="login_description">Accedi</string>
+    <string name="login_email" translatable="false">E-mail</string>
+    <string name="login_password" translatable="false">Password</string>
+    <string name="login_password_dimenticata">Password dimenticata?</string>
+    <string name="login_button">Accedi</string>
+    <string name="login_or">ALTRIMENTI</string>
+    <string name="login_google" translatable="false">Google</string>
+    <string name="login_noaccount">Non possiedi un account?</string>
+    <string name="login_register_button">Registrati</string>
 </resources>

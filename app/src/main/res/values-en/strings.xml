@@ -1,5 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
     <string name="welcome_description">Explore new recipes, get inspired by delicious dishes, and collect all your favorites in one place. Create your own personal cookbook and always keep your culinary ideas close at hand.</string>
+    <string name="login_description">Login</string>
+    <string name="login_password_dimenticata">Forgot password?</string>
+    <string name="login_button">Login</string>
+    <string name="login_or">OR</string>
+    <string name="login_noaccount">Do not have an account?</string>
+    <string name="login_register_button">Register</string>
+
 
 </resources>
