@@ -8,7 +8,12 @@
     <string name="login_password_dimenticata">Password dimenticata?</string>
     <string name="login_button">Accedi</string>
     <string name="login_or">ALTRIMENTI</string>
-    <string name="login_google" translatable="false">Google</string>
+    <string name="login_google">Accedi con Google</string>
     <string name="login_noaccount">Non possiedi un account?</string>
-    <string name="login_register_button">Registrati</string>
+    <string name="login_signup_button">Registrati</string>
+    <string name="signup_description">Registrati</string>
+    <string name="signup_button">Registrati</string>
+    <string name="signup_google">Registrati con Google</string>
+    <string name="signup_yesaccount">Possiedi già un account?</string>
+    <string name="signup_login_button">Accedi</string>
 </resources>
