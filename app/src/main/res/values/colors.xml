@@ -3,4 +3,25 @@
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
     <color name="ic_launcher_background">#F7F5F5</color>
+    <color name="login_background_start">#0A0806</color>
+    <color name="login_background_center">#302017</color>
+    <color name="login_background_end">#63402B</color>
+
+    <color name="primary">#E5A15C</color>
+    <color name="on_primary">#1B0B07</color>
+
+    <color name="secondary">#D96825</color>
+    <color name="on_secondary">#FFFFFF</color>
+
+    <color name="tertiary">#54291C</color>
+    <color name="on_tertiary">#FFFFFF</color>
+
+    <color name="background">#080707</color>
+    <color name="on_background">#F5EBDD</color>
+
+    <color name="surface">#24120D</color>
+    <color name="on_surface">#F5EBDD</color>
+
+    <color name="outline">#806D60</color>
+
 </resources>
