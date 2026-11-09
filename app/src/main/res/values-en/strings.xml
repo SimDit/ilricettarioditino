@@ -8,11 +8,14 @@
     <string name="login_google">Login with Google</string>
     <string name="login_noaccount">Do not have an account?</string>
     <string name="login_signup_button">Sign up</string>
+    <string name="login_error_email">Invalid E-mail address.</string>
+    <string name="login_error_password">Invalid password.</string>
     <string name="signup_description">Sign up</string>
     <string name="signup_button">Sign up</string>
     <string name="signup_google">Sign up with Google</string>
     <string name="signup_yesaccount">Do you have an account?</string>
     <string name="signup_login_button">Login</string>
+    <string name="login_remember_me">Remember me</string>
 
 
 </resources>

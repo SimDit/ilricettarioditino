@@ -2,13 +2,12 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:background="@drawable/login_background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintGuide_percent="0.5"
-    tools:context=".LoginActivity">
+    tools:context=".ui.LoginFragment">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelinesinistra"
@@ -56,7 +55,7 @@
         android:layout_marginStart="15dp"
         android:text="@string/app_name"
         android:textColor="@color/on_surface"
-        android:textSize="30dp"
+        android:textSize="30sp"
         android:textStyle="bold|italic"
         app:layout_constraintBottom_toBottomOf="@id/imageView1"
         app:layout_constraintEnd_toEndOf="parent"
@@ -150,6 +149,20 @@
         android:textSize="12sp"
         app:layout_constraintEnd_toStartOf="@+id/guidelinedestra"
         app:layout_constraintTop_toBottomOf="@+id/textInputLayoutPassword" />
+
+    <com.google.android.material.checkbox.MaterialCheckBox
+        android:id="@+id/rememberMeCheckBox"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:checked="false"
+        android:padding="4dp"
+        android:text="@string/login_remember_me"
+        android:textColor="@color/primary"
+        android:textSize="12sp"
+        app:buttonTint="@color/checkbox_color"
+        app:layout_constraintStart_toEndOf="@id/guidelinesinistra"
+        app:layout_constraintTop_toBottomOf="@id/textInputLayoutPassword"
+        app:useMaterialThemeColors="false" />
 
     <Button
         android:id="@+id/button2"

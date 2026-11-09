@@ -2,13 +2,12 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:background="@drawable/login_background"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintGuide_percent="0.5"
-    tools:context=".SignupActivity">
+    tools:context=".ui.SignUpFragment">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelinesinistra"
@@ -153,41 +152,41 @@
         app:layout_constraintTop_toBottomOf="@+id/textInputLayoutPassword" />
 
     <RelativeLayout
-    android:id="@+id/relative_layout1"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_centerVertical="true"
-    android:layout_marginTop="25dp"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent"
-    app:layout_constraintTop_toBottomOf="@+id/button2">
-
-    <View
-        android:layout_width="wrap_content"
-        android:layout_height="2dp"
-        android:layout_centerVertical="true"
-        android:layout_marginStart="24dp"
-        android:layout_toStartOf="@id/textview3"
-        android:background="@color/secondary" />
-
-    <TextView
-        android:id="@+id/textview3"
-        android:layout_width="wrap_content"
+        android:id="@+id/relative_layout1"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:layout_marginLeft="10dp"
-        android:layout_marginRight="10dp"
-        android:text="@string/login_or"
-        android:textColor="@color/secondary"
-        android:textSize="17sp" />
-
-    <View
-        android:layout_width="wrap_content"
-        android:layout_height="2dp"
         android:layout_centerVertical="true"
-        android:layout_marginEnd="24dp"
-        android:layout_toEndOf="@id/textview3"
-        android:background="@color/secondary" />
+        android:layout_marginTop="25dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/button2">
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="2dp"
+            android:layout_centerVertical="true"
+            android:layout_marginStart="24dp"
+            android:layout_toStartOf="@id/textview3"
+            android:background="@color/secondary" />
+
+        <TextView
+            android:id="@+id/textview3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:text="@string/login_or"
+            android:textColor="@color/secondary"
+            android:textSize="17sp" />
+
+        <View
+            android:layout_width="wrap_content"
+            android:layout_height="2dp"
+            android:layout_centerVertical="true"
+            android:layout_marginEnd="24dp"
+            android:layout_toEndOf="@id/textview3"
+            android:background="@color/secondary" />
 
     </RelativeLayout>
 
@@ -234,3 +233,5 @@
         app:layout_constraintStart_toStartOf="@id/guidelinesinistra" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
