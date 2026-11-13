@@ -7,7 +7,7 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="it.SimDit.IlRicettarioDiTino.ui.LoginFragment"
+        android:name="it.SimDit.IlRicettarioDiTino.ui.welcome.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -16,7 +16,7 @@
     </fragment>
     <fragment
         android:id="@+id/welcomeFragment"
-        android:name="it.SimDit.IlRicettarioDiTino.ui.WelcomeFragment"
+        android:name="it.SimDit.IlRicettarioDiTino.ui.welcome.WelcomeFragment"
         android:label="fragment_welcome"
         tools:layout="@layout/fragment_welcome" >
         <action
@@ -25,7 +25,7 @@
     </fragment>
     <fragment
         android:id="@+id/signUpFragment"
-        android:name="it.SimDit.IlRicettarioDiTino.ui.SignUpFragment"
+        android:name="it.SimDit.IlRicettarioDiTino.ui.welcome.SignUpFragment"
         android:label="fragment_sign_up"
         tools:layout="@layout/fragment_sign_up" >
         <action

@@ -1,11 +1,10 @@
-package it.SimDit.IlRicettarioDiTino.ui;
+package it.SimDit.IlRicettarioDiTino.ui.welcome;
 
 import static it.SimDit.IlRicettarioDiTino.util.Constants.EMAIL_ADDRESS;
 import static it.SimDit.IlRicettarioDiTino.util.Constants.ENCRYPTED_DATA_FILE_NAME;
 import static it.SimDit.IlRicettarioDiTino.util.Constants.ENCRYPTED_SHARED_PREFERENCES_FILE_NAME;
 import static it.SimDit.IlRicettarioDiTino.util.Constants.PASSWORD;
 
-import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
@@ -39,7 +38,7 @@ import it.SimDit.IlRicettarioDiTino.util.DataEncryptionUtil;
  */
 public class LoginFragment extends Fragment {
 
-    private static final String TAG = "WelcomeActivity";
+    private static final String TAG = "LoginFragment";
     private TextInputLayout emailTextInputLayout;
     private TextInputLayout passwordTextInputLayout;
     private DataEncryptionUtil dataEncryptionUtil;

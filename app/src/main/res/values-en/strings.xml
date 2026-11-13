@@ -17,5 +17,8 @@
     <string name="signup_login_button">Login</string>
     <string name="login_remember_me">Remember me</string>
 
+    <string name="recipe_added_to_favorites">Recipe added to favorites</string>
+    <string name="recipe_removed_from_favorites">Recipe deleted from favorites</string>
+
 
 </resources>

@@ -1,4 +1,4 @@
-package it.SimDit.IlRicettarioDiTino.ui;
+package it.SimDit.IlRicettarioDiTino.ui.welcome;
 
 import it.SimDit.IlRicettarioDiTino.R;
 

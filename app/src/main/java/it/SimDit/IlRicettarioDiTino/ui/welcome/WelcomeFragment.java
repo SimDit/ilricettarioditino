@@ -1,36 +1,28 @@
-package it.SimDit.IlRicettarioDiTino.ui;
+package it.SimDit.IlRicettarioDiTino.ui.welcome;
 
-import static android.content.ContentValues.TAG;
-
-import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
-import it.SimDit.IlRicettarioDiTino.R;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.fragment.app.Fragment;
 import androidx.navigation.Navigation;
 
+import it.SimDit.IlRicettarioDiTino.R;
+
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link SignUpFragment#newInstance} factory method to
+ * Use the {@link WelcomeFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class SignUpFragment extends Fragment {
+public class WelcomeFragment extends Fragment {
 
-    public static final String TAG="WelcomeActivity";
+    public static final String TAG="WelcomeFragment";
 
-    public SignUpFragment() {
+    public WelcomeFragment() {
         // Required empty public constructor
     }
 
@@ -40,11 +32,11 @@ public class SignUpFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment SignUpFragment.
+     * @return A new instance of fragment WelcomeFragment.
      */
     // TODO: Rename and change types and number of parameters
-    public static SignUpFragment newInstance(String param1, String param2) {
-        SignUpFragment fragment = new SignUpFragment();
+    public static WelcomeFragment newInstance(String param1, String param2) {
+        WelcomeFragment fragment = new WelcomeFragment();
 
         return fragment;
     }
@@ -59,19 +51,17 @@ public class SignUpFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_sign_up, container, false);
+        return inflater.inflate(R.layout.fragment_welcome, container, false);
     }
 
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        Button loginButton=view.findViewById(R.id.button4);
+        Button loginButton=view.findViewById(R.id.button);
         loginButton.setOnClickListener(v -> {
             Navigation.findNavController(v)
-                    .navigate(R.id.action_signUpFragment_to_loginFragment);
+                    .navigate(R.id.action_welcomeFragment_to_loginFragment);
         });
 
     }
-
-
 
 }

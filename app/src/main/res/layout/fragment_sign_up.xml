@@ -7,7 +7,7 @@
     android:layout_height="match_parent"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintGuide_percent="0.5"
-    tools:context=".ui.SignUpFragment">
+    tools:context=".ui.welcome.SignUpFragment">
 
     <androidx.constraintlayout.widget.Guideline
         android:id="@+id/guidelinesinistra"
