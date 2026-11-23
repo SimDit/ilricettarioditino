@@ -1,8 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@color/on_surface"
     tools:context=".ui.main.FavoritesFragment">
 
     <androidx.recyclerview.widget.RecyclerView
@@ -12,5 +14,31 @@
         android:padding="8dp"
         android:clipToPadding="false"
         tools:listitem="@layout/recipe_list_item" />
+
+    <LinearLayout
+        android:id="@+id/favoritesEmptyState"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="32dp"
+        android:visibility="gone">
+
+        <ImageView
+            android:layout_width="112dp"
+            android:layout_height="112dp"
+            android:contentDescription="@null"
+            android:src="@drawable/food_dish_svgrepo_com"
+            app:tint="@color/outline" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
+            android:gravity="center"
+            android:text="@string/no_favorite_recipes"
+            android:textColor="@color/outline"
+            android:textSize="18sp" />
+    </LinearLayout>
 
 </FrameLayout>

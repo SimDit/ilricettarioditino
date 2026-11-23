@@ -39,6 +39,8 @@ public class FavoritesFragment extends Fragment {
     private Set<String> favoriteRecipesIds;
     private List<Recipes> favoriteRecipesList;
     private RecipesRecyclerViewAdapter recipesRecyclerViewAdapter;
+    private RecyclerView favoriteRecipesRecyclerView;
+    private View favoritesEmptyState;
 
 
     public FavoritesFragment() {
@@ -94,8 +96,8 @@ public class FavoritesFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        RecyclerView favoriteRecipesRecyclerView =
-                view.findViewById(R.id.favoriteRecipesRecyclerView);
+        favoriteRecipesRecyclerView = view.findViewById(R.id.favoriteRecipesRecyclerView);
+        favoritesEmptyState = view.findViewById(R.id.favoritesEmptyState);
 
         RecyclerView.LayoutManager layoutManager =
                 new LinearLayoutManager(requireContext(),
@@ -104,11 +106,8 @@ public class FavoritesFragment extends Fragment {
         List<Recipes> recipesList = getRecipesListWithGson();
 
         if (recipesList != null) {
-
             for (Recipes recipe : recipesList) {
-
                 if (favoriteRecipesIds.contains(recipe.getIdMeal())) {
-
                     recipe.setFavorite(true);
                     favoriteRecipesList.add(recipe);
                 }
@@ -137,12 +136,20 @@ public class FavoritesFragment extends Fragment {
 
                         favoriteRecipesList.remove(recipe);
                         recipesRecyclerViewAdapter.notifyDataSetChanged();
+                        updateEmptyState();
                     }
                 }
         );
 
         favoriteRecipesRecyclerView.setLayoutManager(layoutManager);
         favoriteRecipesRecyclerView.setAdapter(recipesRecyclerViewAdapter);
+        updateEmptyState();
+    }
+
+    private void updateEmptyState() {
+        boolean hasFavorites = !favoriteRecipesList.isEmpty();
+        favoriteRecipesRecyclerView.setVisibility(hasFavorites ? View.VISIBLE : View.GONE);
+        favoritesEmptyState.setVisibility(hasFavorites ? View.GONE : View.VISIBLE);
     }
 
     private List<Recipes> getRecipesListWithGson() {
