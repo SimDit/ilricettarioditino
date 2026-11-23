@@ -1,5 +1,7 @@
 package it.SimDit.IlRicettarioDiTino.model;
 
+
+
 public class Recipes{
     // Main info
     private String idMeal;

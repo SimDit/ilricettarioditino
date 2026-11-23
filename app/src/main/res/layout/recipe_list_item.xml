@@ -21,8 +21,8 @@
 
     <ImageButton
         android:id="@+id/button_add_to_favorites"
-        android:layout_width="48dp"
-        android:layout_height="48dp"
+        android:layout_width="50dp"
+        android:layout_height="50dp"
         android:background="?attr/selectableItemBackgroundBorderless"
         android:padding="12dp"
         android:src="@drawable/ic_favorite_border"

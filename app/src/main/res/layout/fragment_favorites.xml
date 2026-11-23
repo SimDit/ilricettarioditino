@@ -5,10 +5,12 @@
     android:layout_height="match_parent"
     tools:context=".ui.main.FavoritesFragment">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/favoriteRecipesRecyclerView"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="PREFERITI" />
+        android:padding="8dp"
+        android:clipToPadding="false"
+        tools:listitem="@layout/recipe_list_item" />
 
 </FrameLayout>

@@ -27,6 +27,8 @@ import com.google.android.material.textfield.TextInputLayout;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.HashSet;
+import java.util.Set;
 
 import it.SimDit.IlRicettarioDiTino.R;
 import it.SimDit.IlRicettarioDiTino.adapter.IngredientsRecyclerViewAdapter;
@@ -34,17 +36,21 @@ import it.SimDit.IlRicettarioDiTino.adapter.RecipesRecyclerViewAdapter;
 import it.SimDit.IlRicettarioDiTino.model.Ingredients;
 import it.SimDit.IlRicettarioDiTino.model.Recipes;
 import it.SimDit.IlRicettarioDiTino.util.JSONParserUtil;
+import it.SimDit.IlRicettarioDiTino.util.SharedPreferencesUtil;
 
+import static it.SimDit.IlRicettarioDiTino.util.Constants.SHARED_PREFERENCES_FILE_NAME;
+import static it.SimDit.IlRicettarioDiTino.util.Constants.SHARED_PREFERENCES_FAVORITE_RECIPES;
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link ResearchFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
 public class ResearchFragment extends Fragment {
-    private TextInputLayout ingredientInputLayout;
-    private RecyclerView ingredientResultsRecyclerView;
-    private AutoCompleteTextView ingredientInputTextView;
     private static final String TAG = "ResearchFragment";
+    private SharedPreferencesUtil sharedPreferencesUtil;
+    private Set<String> favoriteRecipesIds;
+    private List<Recipes> recipesList;
+    private RecipesRecyclerViewAdapter recipesRecyclerViewAdapter;
 
     public ResearchFragment() {
         // Required empty public constructor
@@ -69,6 +75,21 @@ public class ResearchFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        sharedPreferencesUtil = new SharedPreferencesUtil(
+                requireActivity().getApplication()
+        );
+
+        Set<String> savedFavoriteRecipesIds =
+                sharedPreferencesUtil.readStringSetData(
+                        SHARED_PREFERENCES_FILE_NAME,
+                        SHARED_PREFERENCES_FAVORITE_RECIPES
+                );
+
+        if (savedFavoriteRecipesIds != null) {
+            favoriteRecipesIds = new HashSet<>(savedFavoriteRecipesIds);
+        } else {
+            favoriteRecipesIds = new HashSet<>();
+        }
     }
 
     @Override
@@ -83,9 +104,7 @@ public class ResearchFragment extends Fragment {
         super.onViewCreated(view, savedInstanceState);
         ChipGroup selectedIngredients = view.findViewById(R.id.selectedIngredients);
         TextInputLayout ingredientInputLayout = view.findViewById(R.id.ingredientInputLayout);
-        ;
         AutoCompleteTextView ingredientInputTextView = view.findViewById(R.id.ingredientInput);
-        ;
         RecyclerView ingredientResultsRecyclerView = view.findViewById(R.id.ingredientResults);
         RecyclerView.LayoutManager layoutManagerIngredients =
                 new LinearLayoutManager(requireContext(),
@@ -201,8 +220,13 @@ public class ResearchFragment extends Fragment {
                 new LinearLayoutManager(requireContext(),
                         LinearLayoutManager.VERTICAL, false);
 
-        List<Recipes> recipesList = getRecipesListWithGson();
-        RecipesRecyclerViewAdapter recipesRecyclerViewAdapter = new RecipesRecyclerViewAdapter(recipesList,
+        recipesList = getRecipesListWithGson();
+        for (Recipes recipe : recipesList) {
+            recipe.setFavorite(
+                    favoriteRecipesIds.contains(recipe.getIdMeal())
+            );
+        }
+        recipesRecyclerViewAdapter = new RecipesRecyclerViewAdapter(recipesList,
                 new RecipesRecyclerViewAdapter.OnItemClickListener() {
                     @Override
                     public void onRecipeItemClick(Recipes recipe) {
@@ -226,6 +250,18 @@ public class ResearchFragment extends Fragment {
                                 : getString(R.string.recipe_removed_from_favorites);
 
                         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show();
+
+                        if (recipe.getFavorite()) {
+                            favoriteRecipesIds.add(recipe.getIdMeal());
+                        } else {
+                            favoriteRecipesIds.remove(recipe.getIdMeal());
+                        }
+
+                        sharedPreferencesUtil.writeStringSetData(
+                                SHARED_PREFERENCES_FILE_NAME,
+                                SHARED_PREFERENCES_FAVORITE_RECIPES,
+                                favoriteRecipesIds
+                        );
                     }
                 });
 
@@ -235,6 +271,41 @@ public class ResearchFragment extends Fragment {
 
 
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+
+        // Rileggiamo i preferiti salvati
+        Set<String> savedFavoriteRecipesIds =
+                sharedPreferencesUtil.readStringSetData(
+                        SHARED_PREFERENCES_FILE_NAME,
+                        SHARED_PREFERENCES_FAVORITE_RECIPES
+                );
+
+        if (savedFavoriteRecipesIds != null) {
+            favoriteRecipesIds = new HashSet<>(savedFavoriteRecipesIds);
+        } else {
+            favoriteRecipesIds = new HashSet<>();
+        }
+
+        // Aggiorniamo lo stato del cuore di ogni ricetta
+        if (recipesList != null && recipesRecyclerViewAdapter != null) {
+
+            for (Recipes recipe : recipesList) {
+                recipe.setFavorite(
+                        favoriteRecipesIds.contains(recipe.getIdMeal())
+                );
+            }
+
+            recipesRecyclerViewAdapter.notifyDataSetChanged();
+        }
+    }
+
+
+
+
+
 
 
     private List<Recipes> getRecipesListWithGson() {

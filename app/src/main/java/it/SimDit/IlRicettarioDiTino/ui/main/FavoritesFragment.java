@@ -2,13 +2,32 @@ package it.SimDit.IlRicettarioDiTino.ui.main;
 
 import android.os.Bundle;
 
+import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.fragment.app.Fragment;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import java.util.List;
+import java.util.Set;
+import java.util.ArrayList;
+import java.util.HashSet;
+
 import it.SimDit.IlRicettarioDiTino.R;
+import it.SimDit.IlRicettarioDiTino.adapter.RecipesRecyclerViewAdapter;
+import it.SimDit.IlRicettarioDiTino.model.Recipes;
+import it.SimDit.IlRicettarioDiTino.util.JSONParserUtil;
+import it.SimDit.IlRicettarioDiTino.util.SharedPreferencesUtil;
+
+import java.io.IOException;
+
+import static it.SimDit.IlRicettarioDiTino.util.Constants.RECIPES_API_TEST_JSON_FILE;
+import static it.SimDit.IlRicettarioDiTino.util.Constants.SHARED_PREFERENCES_FILE_NAME;
+import static it.SimDit.IlRicettarioDiTino.util.Constants.SHARED_PREFERENCES_FAVORITE_RECIPES;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -16,15 +35,11 @@ import it.SimDit.IlRicettarioDiTino.R;
  * create an instance of this fragment.
  */
 public class FavoritesFragment extends Fragment {
+    private SharedPreferencesUtil sharedPreferencesUtil;
+    private Set<String> favoriteRecipesIds;
+    private List<Recipes> favoriteRecipesList;
+    private RecipesRecyclerViewAdapter recipesRecyclerViewAdapter;
 
-    // TODO: Rename parameter arguments, choose names that match
-    // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
 
     public FavoritesFragment() {
         // Required empty public constructor
@@ -41,20 +56,31 @@ public class FavoritesFragment extends Fragment {
     // TODO: Rename and change types and number of parameters
     public static FavoritesFragment newInstance(String param1, String param2) {
         FavoritesFragment fragment = new FavoritesFragment();
-        Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
-        fragment.setArguments(args);
+
         return fragment;
     }
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+
+        sharedPreferencesUtil = new SharedPreferencesUtil(
+                requireActivity().getApplication()
+        );
+
+        Set<String> savedFavoriteRecipesIds =
+                sharedPreferencesUtil.readStringSetData(
+                        SHARED_PREFERENCES_FILE_NAME,
+                        SHARED_PREFERENCES_FAVORITE_RECIPES
+                );
+
+        if (savedFavoriteRecipesIds != null) {
+            favoriteRecipesIds = new HashSet<>(savedFavoriteRecipesIds);
+        } else {
+            favoriteRecipesIds = new HashSet<>();
         }
+
+        favoriteRecipesList = new ArrayList<>();
     }
 
     @Override
@@ -62,5 +88,77 @@ public class FavoritesFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_favorites, container, false);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        RecyclerView favoriteRecipesRecyclerView =
+                view.findViewById(R.id.favoriteRecipesRecyclerView);
+
+        RecyclerView.LayoutManager layoutManager =
+                new LinearLayoutManager(requireContext(),
+                        LinearLayoutManager.VERTICAL, false);
+
+        List<Recipes> recipesList = getRecipesListWithGson();
+
+        if (recipesList != null) {
+
+            for (Recipes recipe : recipesList) {
+
+                if (favoriteRecipesIds.contains(recipe.getIdMeal())) {
+
+                    recipe.setFavorite(true);
+                    favoriteRecipesList.add(recipe);
+                }
+            }
+        }
+
+        recipesRecyclerViewAdapter = new RecipesRecyclerViewAdapter(
+                favoriteRecipesList,
+                new RecipesRecyclerViewAdapter.OnItemClickListener() {
+
+                    @Override
+                    public void onRecipeItemClick(Recipes recipe) {
+
+                    }
+
+                    @Override
+                    public void onFavoriteButtonClick(Recipes recipe) {
+
+                        favoriteRecipesIds.remove(recipe.getIdMeal());
+
+                        sharedPreferencesUtil.writeStringSetData(
+                                SHARED_PREFERENCES_FILE_NAME,
+                                SHARED_PREFERENCES_FAVORITE_RECIPES,
+                                new HashSet<>(favoriteRecipesIds)
+                        );
+
+                        favoriteRecipesList.remove(recipe);
+                        recipesRecyclerViewAdapter.notifyDataSetChanged();
+                    }
+                }
+        );
+
+        favoriteRecipesRecyclerView.setLayoutManager(layoutManager);
+        favoriteRecipesRecyclerView.setAdapter(recipesRecyclerViewAdapter);
+    }
+
+    private List<Recipes> getRecipesListWithGson() {
+
+        JSONParserUtil jsonParserUtil =
+                new JSONParserUtil(requireActivity().getApplication());
+
+        try {
+            return jsonParserUtil
+                    .recipesParseJSONFileWithGSon(RECIPES_API_TEST_JSON_FILE)
+                    .getRecipesList();
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        return null;
     }
 }

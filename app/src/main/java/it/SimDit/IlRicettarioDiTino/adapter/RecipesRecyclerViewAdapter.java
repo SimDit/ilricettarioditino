@@ -100,7 +100,7 @@ public class RecipesRecyclerViewAdapter extends
             favoriteButton.setSelected(recipe.getFavorite());
             favoriteButton.setImageResource(
                     recipe.getFavorite()
-                            ? R.drawable.food_dish_svgrepo_com
+                            ? R.drawable.heart_like_solid_svgrepo_com
                             : R.drawable.ic_favorite_border
             );
         }
@@ -123,7 +123,7 @@ public class RecipesRecyclerViewAdapter extends
                 favoriteButton.setSelected(isFavorite);
                 favoriteButton.setImageResource(
                         isFavorite
-                                ? R.drawable.food_dish_svgrepo_com
+                                ? R.drawable.heart_like_solid_svgrepo_com
                                 : R.drawable.ic_favorite_border
                 );
 

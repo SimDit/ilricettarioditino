@@ -1,6 +1,10 @@
 package it.SimDit.IlRicettarioDiTino.util;
 
 public class Constants {
+    // Constants for SharedPreferences
+    public static final String SHARED_PREFERENCES_FILE_NAME = "it.SimDit.IlRicettarioDiTino.preferences";
+    public static final String SHARED_PREFERENCES_FAVORITE_RECIPES = "favorite_recipes";
+
 
     // Constants for EncryptedSharedPreferences
     public static final String ENCRYPTED_SHARED_PREFERENCES_FILE_NAME = "it.SimDit.IlRicettarioDiTino.encrypted_preferences";
