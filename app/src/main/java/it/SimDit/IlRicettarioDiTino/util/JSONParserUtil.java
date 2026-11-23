@@ -6,8 +6,11 @@ import android.util.JsonReader;
 import android.util.JsonToken;
 
 
+import com.google.gson.Gson;
+
 import org.json.JSONException;
 
+import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -15,6 +18,8 @@ import java.nio.charset.StandardCharsets;
 import java.util.ArrayList;
 import java.util.List;
 
+import it.SimDit.IlRicettarioDiTino.model.Ingredients;
+import it.SimDit.IlRicettarioDiTino.model.IngredientsMeals;
 import it.SimDit.IlRicettarioDiTino.model.Recipes;
 import it.SimDit.IlRicettarioDiTino.model.RecipesMeals;
 
@@ -33,6 +38,11 @@ public class JSONParserUtil {
     private final String idMealParameter="idMeal";
     private final String strAreaParameter="strArea";
     private final String strCountryParameter="strCountry";
+    private final String idIngredientParameter="idIngredient";
+    private final String strIngredientParameter="strIngredient";
+    private final String strDescriptionParameter="strDescription";
+    private final String strThumbParameter="strThumb";
+    private final String strTypeParameter="strType";
 
     public JSONParserUtil(Application application) {
         this.context = application.getApplicationContext();
@@ -45,7 +55,7 @@ public class JSONParserUtil {
      * @return The NewsApiResponse object associated with the JSON file content.
      * @throws IOException
      */
-    public RecipesMeals parseJSONFileWithJsonReader(String fileName) throws IOException {
+    /*public RecipesMeals parseJSONFileWithJsonReader(String fileName) throws IOException {
         RecipesMeals recipesMeals = new RecipesMeals(new ArrayList<>());
         List<Recipes> recipesList = new ArrayList<>();
 
@@ -101,6 +111,64 @@ public class JSONParserUtil {
         recipesMeals.setRecipesList(recipesList);
         return recipesMeals;
     }
+
+    public IngredientsMeals ingredientsMealsParseJSONFileWithJsonReader(String fileName) throws IOException {
+        IngredientsMeals ingredientsMeals = new IngredientsMeals(new ArrayList<>());
+        List<Ingredients> ingredientsList = new ArrayList<>();
+
+        try (InputStream inputStream = context.getAssets().open(fileName);
+             JsonReader jsonReader = new JsonReader(
+                     new InputStreamReader(inputStream, StandardCharsets.UTF_8))) {
+            jsonReader.beginObject();
+
+            while (jsonReader.hasNext()) {
+                String rootJSONParam = jsonReader.nextName();
+                if (rootJSONParam.equals(mealsParameter)) {
+                    if (jsonReader.peek() == JsonToken.NULL) {
+                        jsonReader.nextNull();
+                        continue;
+                    }
+                    jsonReader.beginArray();
+                    while (jsonReader.hasNext()) {
+                        if (jsonReader.peek() == JsonToken.NULL) {
+                            jsonReader.nextNull();
+                            continue;
+                        }
+                        jsonReader.beginObject();
+                        Ingredients ingredients = new Ingredients();
+                        while (jsonReader.hasNext()) {
+                            String ingredientsJSONParam = jsonReader.nextName();
+                            if (jsonReader.peek() == JsonToken.NULL) {
+                                jsonReader.nextNull();
+                            } else if (ingredientsJSONParam.equals(idIngredientParameter)) {
+                                ingredients.setIdIngredient(jsonReader.nextString());
+                            } else if (ingredientsJSONParam.equals(strIngredientParameter)) {
+                                ingredients.setStrIngredient(jsonReader.nextString());
+                            } else if (ingredientsJSONParam.equals(strDescriptionParameter)) {
+                                ingredients.setStrDescription(jsonReader.nextString());
+                            } else if (ingredientsJSONParam.equals(strTypeParameter)) {
+                                ingredients.setStrType(jsonReader.nextString());
+                            } else if(ingredientsJSONParam.equals(strThumbParameter)){
+                                ingredients.setStrThumb(jsonReader.nextString());
+                            }else {
+                                jsonReader.skipValue();
+                            }
+                        }
+                        jsonReader.endObject();
+                        ingredientsList.add(ingredients);
+                    }
+                    jsonReader.endArray();
+                } else {
+                    jsonReader.skipValue();
+                }
+            }
+            jsonReader.endObject();
+        }
+
+        ingredientsMeals.setIngredients(ingredientsList);
+        return ingredientsMeals;
+    }
+    */
 
 
 
@@ -161,11 +229,19 @@ public class JSONParserUtil {
      * @return The NewsApiResponse object associated with the JSON file content.
      * @throws IOException
      */
-    /*
-    public NewsApiResponse parseJSONFileWithGSon(String fileName) throws IOException {
+
+    public RecipesMeals recipesParseJSONFileWithGSon(String fileName) throws IOException {
         InputStream inputStream = context.getAssets().open(fileName);
         BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
 
-        return new Gson().fromJson(bufferedReader, NewsApiResponse.class);
-    }*/
+        return new Gson().fromJson(bufferedReader, RecipesMeals.class);
+    }
+
+    public IngredientsMeals ingredientsParseJSONFileWithGSon(String fileName) throws IOException {
+        InputStream inputStream = context.getAssets().open(fileName);
+        BufferedReader bufferedReader = new BufferedReader(new InputStreamReader(inputStream));
+
+        return new Gson().fromJson(bufferedReader, IngredientsMeals.class);
+    }
 }
+

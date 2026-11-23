@@ -21,5 +21,6 @@
     <string name="signup_login_button">Accedi</string>
     <string name="recipe_added_to_favorites">Ricetta aggiunta ai preferiti</string>
     <string name="recipe_removed_from_favorites">Ricetta rimossa dai preferiti</string>
+    <string name="ingredient_selected">Ingrediente selezionato</string>
 
 </resources>

@@ -19,6 +19,8 @@
 
     <string name="recipe_added_to_favorites">Recipe added to favorites</string>
     <string name="recipe_removed_from_favorites">Recipe deleted from favorites</string>
+    <string name="ingredient_selected">Selected ingredient</string>
 
 
 </resources>
+

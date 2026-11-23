@@ -5,13 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:background="?android:selectableItemBackground"
-    android:minHeight="80dp"
-    android:padding="12dp">
+    android:minHeight="56dp"
+    android:paddingStart="12dp"
+    android:paddingTop="8dp"
+    android:paddingEnd="12dp"
+    android:paddingBottom="8dp">
 
     <ImageView
         android:id="@+id/ingredient_image"
-        android:layout_width="56dp"
-        android:layout_height="56dp"
+        android:layout_width="40dp"
+        android:layout_height="40dp"
         android:contentDescription="@null"
         android:scaleType="centerCrop"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -33,3 +36,6 @@
         app:layout_constraintTop_toTopOf="parent"
         tools:text="Ingredient name" />
 </androidx.constraintlayout.widget.ConstraintLayout>
+
+
+

@@ -11,6 +11,7 @@ public class Constants {
     public static final String ENCRYPTED_DATA_FILE_NAME = "it.SimDit.IlRicettarioDiTino.encrypted_file.txt";
 
     public static final String RECIPES_API_TEST_JSON_FILE="recipes.json";
+    public static final String INGREDIENTS_API_TEST_JSON_FILE="ingredients.json";
 
 
 }
