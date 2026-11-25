@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_nav_graph"
+    app:startDestination="@id/researchFragment">
+
+    <fragment
+        android:id="@+id/researchFragment"
+        android:name="it.SimDit.IlRicettarioDiTino.ui.main.ResearchFragment"
+        android:label="fragment_research"
+        tools:layout="@layout/fragment_research" />
+    <fragment
+        android:id="@+id/favouritesFragment"
+        android:name="it.SimDit.IlRicettarioDiTino.ui.main.FavoritesFragment"
+        android:label="fragment_favourites"
+        tools:layout="@layout/fragment_favorites" />
+    <fragment
+        android:id="@+id/personalRecipesFragment"
+        android:name="it.SimDit.IlRicettarioDiTino.ui.main.PersonalRecipesFragment"
+        android:label="fragment_personal_recipes"
+        tools:layout="@layout/fragment_personal_recipes" />
+    <fragment
+        android:id="@+id/settingsFragment"
+        android:name="it.SimDit.IlRicettarioDiTino.ui.main.SettingsFragment"
+        android:label="fragment_settings"
+        tools:layout="@layout/fragment_settings" />
+    <fragment
+        android:id="@+id/recipesDetailFragment"
+        android:name="it.SimDit.IlRicettarioDiTino.ui.main.RecipesDetailFragment"
+        android:label="RecipesDetailFragment"
+        tools:layout="@layout/fragment_recipes_detail"/>
+</navigation>
