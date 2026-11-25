@@ -11,6 +11,7 @@ public class RecipesMeals {
     public RecipesMeals(List<Recipes> recipesList) {
         this.recipesList = recipesList;
     }
+
     public List<Recipes> getRecipesList() {
         return recipesList;
     }
